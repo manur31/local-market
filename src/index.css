@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  /* Plus Jakarta Sans (carga en index.html) */
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+
   /* Core */
   --color-primary: #0f5238;
   --color-primary-container: #2d6a4f;
@@ -25,4 +28,10 @@
 
   /* Outline */
   --color-outline: rgba(25, 28, 29, 0.15);
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
 }
