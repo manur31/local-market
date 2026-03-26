@@ -1,10 +1,26 @@
-
+import { AuthProvider } from "./context/authContext"
+import {BrowserRouter, Routes, Route} from 'react-router'
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 
 function App() {
 
   return (
     <>
-    <h1 className="uppercase text-center text-6xl font-black mt-10 text-primary">Hola mundo!</h1>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={'/'} element/> {/* Aqui ve HomePage */}
+          <Route path={'/products'} element/> {/* Aqui ve ProductListingPage */}
+          <Route path={'/products/:id'} element/> {/* Aqui ve ProductDetailPage */}
+          <Route path={'/cart'} element/> {/* Aqui ve CartPage */}
+          <Route path={'/checkout'} element/> {/* Aqui ve CheckoutPage */}
+          <Route path={'/dashboard'} element/> {/* Aqui ve DashboardPage */}
+          <Route path={'/login'} element={<Login/>}/>
+          <Route path={'/register'} element={<Register/>}/>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
     </>
   )
 }
