@@ -1,4 +1,3 @@
-import style from './CardBusiness.module.css';
 
 const CardBusiness = () => {
    return (
