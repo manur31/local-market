@@ -2,9 +2,12 @@ import { useForm } from 'react-hook-form'
 import { loginSchema } from "../lib/schemas/authSchemas"
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from "../context/authContext.jsx"
+import { useNavigate } from 'react-router'
 
 function Login() {
     const { login } = useAuth()
+
+    const navigate = useNavigate()
 
     const { 
       register, 
@@ -21,6 +24,7 @@ function Login() {
         try {
             await login(data) 
             reset()
+            navigate('/dashboard')
         } catch (error) {
           if (error.message === "Invalid login credentials") {
             setError("root", {message: 'Email o contraseña invalidos'})

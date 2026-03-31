@@ -13,6 +13,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const register = async (formData) => {
         const user = await authService.register(formData) 
@@ -36,7 +37,9 @@ export const AuthProvider = ({children}) => {
             register, 
             login,
             logout,
-            user
+            user,
+            loading,
+            setLoading
         }}>
             {children}
         </AuthContext.Provider>
