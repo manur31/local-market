@@ -1,6 +1,25 @@
-import { FiEdit2, FiTrash2 } from "react-icons/fi";
+import { useState } from "react";
+import { FiEdit2, FiTrash2, FiXOctagon } from "react-icons/fi";
 
-function ProductsTable({products, onEdit}) {
+function ProductsTable({products, onEdit, business_id, deleteProduct}) {
+
+  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = (product) => {
+    if (open) {
+      setSelectedProduct(null)
+    } else {
+      setSelectedProduct(product)
+    }
+    setOpen(!open)
+  }
+
+  const handleDelete = async () => {
+    await deleteProduct(business_id, selectedProduct.id)
+    setOpen(!open)
+  }
+
   return (
     <div className="bg-white overflow-auto max-h-[400px]">
       <table className="w-full text-sm text-left">
@@ -36,7 +55,7 @@ function ProductsTable({products, onEdit}) {
 
                 {/* CATEGORY */}
                 <td className="px-6 py-4 text-gray-600 text-nowrap">
-                  {product.category_id}
+                  {product.category}
                 </td>
 
                 {/* PRICE */}
@@ -67,7 +86,7 @@ function ProductsTable({products, onEdit}) {
                   <button onClick={() => onEdit(product)} className="text-gray-500 hover:text-blue-600 transition cursor-pointer">
                     <FiEdit2 size={18} />
                   </button>
-                  <button className="text-gray-500 hover:text-red-600 transition cursor-pointer">
+                  <button onClick={() => handleOpen(product)} className="text-gray-500 hover:text-red-600 transition cursor-pointer">
                     <FiTrash2 size={18} />
                   </button>
                 </td>
@@ -76,6 +95,21 @@ function ProductsTable({products, onEdit}) {
           })}
         </tbody>
       </table>
+
+      <section className={`${!open && 'hidden'} fixed top-0 left-0 flex items-center justify-center bg-gray-500/60 w-full h-screen px-4`}>
+          <article className="flex flex-col items-center gap-4 bg-white p-6 rounded-2xl w-64">
+            <FiXOctagon className="text-4xl text-red-500"/>
+            <h3 className="text-center">Estas seguro de que quieres eliminar <span className="text-primary">{selectedProduct?.name}</span></h3>
+            <div className="flex gap-4 mt-2">
+              <button onClick={handleOpen} className="text-gray-500 hover:text-neutral-600 border border-transparent hover:border-neutral-600  py-1 px-4 w-fit rounded-lg transition cursor-pointer">
+                Cancelar
+              </button>
+              <button onClick={handleDelete} className="text-white bg-red-500 hover:text-red-600 border border-red-500 py-1 px-4 w-fit rounded-lg hover:bg-white transition cursor-pointer">
+                Eliminar
+              </button>
+            </div>
+          </article>
+      </section>
     </div>
   );
 }

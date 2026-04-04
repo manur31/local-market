@@ -1,11 +1,11 @@
 import { FiEye } from "react-icons/fi";
 import OrderDetail from "./OrderDetail";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function OrdersTable({orders}) {
 
   const [selectedOrder, setSelectedOrder] = useState(null)
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const getStatusStyles = (status) => {
     switch (status) {
@@ -19,6 +19,14 @@ function OrdersTable({orders}) {
         return "bg-gray-100 text-gray-600";
     }
   };
+
+  useEffect(() => {
+          if (open) {
+              document.body.style.overflowY = 'hidden'
+          } else {
+              document.body.style.overflowY = 'auto'
+          }
+      }, [open])
 
   const handleView = (order) => {
     setSelectedOrder(order)
@@ -97,7 +105,7 @@ function OrdersTable({orders}) {
         </tbody>
       </table>
 
-      <section className={`${open && 'hidden'} absolute top-0 left-0 flex items-center justify-center bg-gray-500/60 w-full h-screen px-4`}>
+      <section className={`${!open && 'hidden'} fixed top-0 left-0 flex items-center justify-center bg-gray-500/60 w-full h-screen px-4`}>
           <OrderDetail order={selectedOrder} closeCard={() => setOpen(!open)}/>
       </section>
     </div>
