@@ -12,8 +12,6 @@ export const register = async (formData) => {
         location, 
     } = formData
 
-    console.log("1. Antes de signUp")
-
     const { data, error } = await supabase.auth.signUp({
         email,
         password
@@ -25,7 +23,7 @@ export const register = async (formData) => {
 
     const { data: userData } = await supabase.auth.getUser()
 
-    const { error: businessError } = await supabase
+    const { data: businessData, error: businessError } = await supabase
         .from('business')
         .insert({
             owner_id: userData?.user?.id,
@@ -34,11 +32,14 @@ export const register = async (formData) => {
             description, 
             slogan, 
             location,
-        })
+        }).select()
 
     if (businessError) throw businessError
 
-    return user
+    return {
+        user: user,
+        business: businessData
+    }
 }
 
 export const login = async (email, password) => {
@@ -49,7 +50,17 @@ export const login = async (email, password) => {
 
     if (error) throw error
 
-    return data.user
+    const user = data.user
+
+    const { data: businessData, error: businessError } = await supabase.from('business')
+    .select()
+    .eq('owner_id', data.user.id)
+
+    if (businessError) throw businessError
+
+    user.business = businessData[0]
+    
+    return user
 }
 
 export const logout = async () => {
