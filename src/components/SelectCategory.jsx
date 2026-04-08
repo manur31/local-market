@@ -49,7 +49,7 @@ function SelectCategory({ register, errors, setValue, initialCategory, newCatego
           className="bg-surface-high rounded-xl py-2 px-4 font-medium text-sm"
         >
           <option value="">Selecionar una categoria</option>
-          {categories.map((cat) => (
+          {categories?.map((cat) => (
             <option key={cat.id} value={cat.name}>
               {cat.name}
             </option>

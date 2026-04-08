@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { FiEdit2, FiTrash2, FiXOctagon } from "react-icons/fi";
+import ProductImagesForm from "./ProductImagesForm";
 
-function ProductsTable({products, onEdit, business_id, deleteProduct}) {
+function ProductsTable({products, onEdit, business_id, deleteProduct, uploadProductImage}) {
 
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [open, setOpen] = useState(false)
+  const [openFormImage, setOpenFormImage] = useState(false)
 
   const handleOpen = (product) => {
     if (open) {
@@ -13,6 +15,15 @@ function ProductsTable({products, onEdit, business_id, deleteProduct}) {
       setSelectedProduct(product)
     }
     setOpen(!open)
+  }
+
+  const handleOpenFormImage = (product) => {
+    if (setOpenFormImage) {
+      setSelectedProduct(product)
+    } else {
+      setSelectedProduct(null)
+    }
+    setOpenFormImage(!openFormImage)
   }
 
   const handleDelete = async () => {
@@ -45,8 +56,12 @@ function ProductsTable({products, onEdit, business_id, deleteProduct}) {
               >
                 {/* PRODUCT */}
                 <td className="px-6 py-4 flex items-center gap-3">
-                  <div className="min-w-12 min-h-12 rounded-lg bg-gray-200 flex items-center justify-center text-xs text-gray-500">
-                    Img
+                  <div onClick={() => handleOpenFormImage(product)} className="w-12 h-12 rounded-lg bg-gray-200 flex items-center justify-center text-xs text-gray-500 cursor-pointer overflow-hidden">
+                    {product.images ? (
+                      <img className="w-full h-full object-cover" src={product.images[0]}/> 
+                    ): (
+                      <p>Img</p>
+                    )}
                   </div>
                   <span className="font-medium text-gray-800 text-nowrap">
                     {product.name}
@@ -82,7 +97,7 @@ function ProductsTable({products, onEdit, business_id, deleteProduct}) {
                 </td>
 
                 {/* ACTIONS */}
-                <td className="px-6 py-4 flex justify-end gap-3">
+                <td className="px-6 py-4 flex justify-end gap-3 h-full">
                   <button onClick={() => onEdit(product)} className="text-gray-500 hover:text-blue-600 transition cursor-pointer">
                     <FiEdit2 size={18} />
                   </button>
@@ -109,6 +124,10 @@ function ProductsTable({products, onEdit, business_id, deleteProduct}) {
               </button>
             </div>
           </article>
+      </section>
+
+      <section className={`${!openFormImage && 'hidden'} fixed top-0 left-0 flex items-center justify-center bg-gray-500/60 w-full h-screen px-4 z-30`}>
+          <ProductImagesForm product={selectedProduct} uploadProductImage={uploadProductImage} closeForm={() => setOpenFormImage(!openFormImage)}/>
       </section>
     </div>
   );

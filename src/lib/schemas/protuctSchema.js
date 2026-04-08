@@ -22,5 +22,8 @@ export const createProductSchema = z.object({
         required_error: 'Descripcion es requerida'
     }).min(30, {
         message: 'La descripcion debe tener almenos 30 caracteres'
-    })
+    }),
+    category: z.string({
+        required_error: 'Categoria es requerida'
+    }).min(1, "Selecciona una categoría"),
 })

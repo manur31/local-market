@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import * as authService from "../services/authService.js"
+import { set } from "zod";
 
 const AuthContext = createContext()
 
@@ -17,10 +18,6 @@ export const AuthProvider = ({children}) => {
         return storedUser ? JSON.parse(storedUser) : null;
     })
     const [loading, setLoading] = useState(false)
-
-    // useEffect(() => {
-        
-    // }, [user])
 
     const register = async (formData) => {
         setLoading(true)
@@ -46,6 +43,12 @@ export const AuthProvider = ({children}) => {
         setLoading(false)
     }
 
+    const uploadBusinessImage = async (businessId, image) => {
+        setLoading(true) 
+        await authService.uploadBusinessImage(businessId, image)
+        setLoading(false)
+    }
+
     return (
         <AuthContext.Provider
         value={{
@@ -54,7 +57,8 @@ export const AuthProvider = ({children}) => {
             logout,
             user,
             loading,
-            setLoading
+            setLoading,
+            uploadBusinessImage
         }}>
             {children}
         </AuthContext.Provider>
