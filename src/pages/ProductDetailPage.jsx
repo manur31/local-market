@@ -4,6 +4,9 @@ import Footer from "../components/Footer.jsx";
 import arbol from "../assets/arbol.jpg";
 
 function ProductDetailPage({ name, price, stock, image, description }) {
+
+  
+
   image = arbol
   // Generar datos random UNA vez
   const [randomData] = useState(() => {

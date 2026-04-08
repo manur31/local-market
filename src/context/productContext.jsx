@@ -1,7 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import * as productService from '../services/productService'
 
-
 const ProductContext = createContext()
 
 export const useProduct = () => {
@@ -17,6 +16,7 @@ export const useProduct = () => {
 export const ProductProvider = ({children}) => {
 
     const [products, setProducts] = useState([])
+    const [businessProducts, setBusinessProducts] = useState([])
 
     const getProducts = async () => {
         const products = await productService.getProducts()
@@ -25,9 +25,9 @@ export const ProductProvider = ({children}) => {
     }
 
     const getProductsByBusiness = async (business_id) => {
-        const products = productService.getProductsByBusiness(business_id)
+        const products = await productService.getProductByBusiness(business_id)
 
-        setProducts(products)
+        setBusinessProducts(products)
     }
 
     const getProductsById = async (id) => {
@@ -37,9 +37,7 @@ export const ProductProvider = ({children}) => {
     }
 
     const createProduct = async (business_id, productData) => {
-        console.log('si')
         const product = await productService.createProduct(business_id, productData)
-        console.log('sisi')
 
         setProducts([...products, ...product])
     }
@@ -56,6 +54,10 @@ export const ProductProvider = ({children}) => {
         setProducts(products.filter(product => product.id !== id))
     }
 
+    const uploadProductImage = async (business_id, id, image) => {
+        await productService.uploadProductImage(business_id, id, image)
+    }
+
     return (
         <ProductContext.Provider
         value={{
@@ -65,7 +67,9 @@ export const ProductProvider = ({children}) => {
             createProduct,
             updateProduct,
             deleteProduct,
-            products
+            products,
+            businessProducts,
+            uploadProductImage
         }}
         >
             {children}

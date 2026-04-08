@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabaseClient.js'
+import { uploadBusinessLogo } from './storageService.js'
 
 // registro de negocio con usuario
 export const register = async (formData) => {
@@ -65,5 +66,16 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
     const { error } = await supabase.auth.signOut()
+    if (error) throw error
+}
+
+export const uploadBusinessImage = async (businessId, image) => {
+    const imageUrl = await uploadBusinessLogo(image, businessId)
+    console.log(imageUrl)
+
+    const { error } = await supabase.from('business').update({
+        image_url: imageUrl
+    }).eq('id', businessId)
+
     if (error) throw error
 }

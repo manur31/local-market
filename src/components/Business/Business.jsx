@@ -6,7 +6,7 @@ const Business = () => {
          <div>
             <div className="flex justify-between">
                <div className="gap-0.5">
-                  <div className="text-[#855300] font-sans font-bold text-xs leading-4 tracking-widest uppercase">THE NEIGHBORHOOD PULSE</div>
+                  <div className="text-secondary font-sans font-bold text-xs leading-4 tracking-widest uppercase">THE NEIGHBORHOOD PULSE</div>
                   <div className="font-jakarta font-bold text-[36px] leading-[40px] tracking-normal">Featured Local Stores</div>
                </div>
                <div className="max-w-[448px] pr-[39.14px]">
