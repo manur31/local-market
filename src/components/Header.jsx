@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <section className="bg-surface max-w-7xl mx-auto w-full flex justify-between items-center p-6" >
+      <section className="bg-surface mx-auto w-full flex justify-between items-center p-6 lg:px-100" >
         <Link to={'/'}>
           <h1 onClick={() => setOpenMenu(false)} className="font-bold text-2xl text-primary">Local Market</h1>
         </Link>
