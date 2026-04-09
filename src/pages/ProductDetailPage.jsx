@@ -20,8 +20,6 @@ function ProductDetailPage({ name, price, stock, image, description }) {
 
   return (
     <section className="bg-gray-100">
-      <Header />
-
       {/* MOBILE */}
       <section className="lg:hidden min-h-screen">
         <div className="w-full h-[350px] overflow-hidden">
@@ -106,8 +104,6 @@ function ProductDetailPage({ name, price, stock, image, description }) {
           </div>
         </div>
       </section>
-
-      <Footer />
     </section>
   );
 }
