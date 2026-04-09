@@ -1,16 +1,15 @@
 import { useState } from "react";
 
-function CardProduct({ title, price, image, businessId, description, lote }) {
+function CardProduct({product}) {
   const [liked, setLiked] = useState(false);
 
   return (
     <article
-      className="w-85  bg-surface rounded-lg m-10 overflow-hidden 
-                        transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+      className="w-85  bg-surface rounded-lg m-10 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 shadow-xl sh-"
     >
       <div className="relative overflow-hidden">
         {/* TEXTO */}
-        {lote ? (
+        {product?.stock ? (
           <p className="absolute top-2 left-2 bg-green-200 text-grey-800 text-xs px-3 py-1 rounded-full z-10 border border-green-500">
             HAY STOCK
           </p>
@@ -30,22 +29,26 @@ function CardProduct({ title, price, image, businessId, description, lote }) {
         </button>
 
         {/* IMAGEN con zoom */}
-        <img
-          className="w-full h-[256px] object-cover transition-transform duration-300 hover:scale-105"
-          src={image}
-          alt={title}
-        />
+        {product.images[0] ? (
+          <img
+            className="w-full h-[256px] object-cover transition-transform duration-300 hover:scale-105"
+            src={product?.images[0]}
+            alt={`imagen acerca de ${product?.name}`}
+          />
+        ):(
+          <p>Este producto no tiene imagen</p>
+        )}
       </div>
 
       <section className="p-6">
         <div className="flex justify-between">
           <div>
-            <p className="font-bold text-[10px]">{businessId}</p>
-            <h2 className="font-bold text-[18px]">{title}</h2>
+            <p className="font-bold text-[10px]">{product?.category}</p>
+            <h2 className="font-bold text-[18px]">{product?.name}</h2>
           </div>
-          <p className="text-primary text-[20px] font-bold">${price}</p>
+          <p className="text-primary text-[20px] font-bold">${product?.price}</p>
         </div>
-        <p className="py-2 text-sm text-[#999999] h-[60px] overflow-hidden">{description}</p>
+        <p className="py-2 text-sm text-[#999999] h-[60px] overflow-hidden">{product?.description}</p>
         <button className="bg-[#9CE39E] w-full h-13 rounded-lg transition-all duration-150 hover:bg-green-400 active:scale-95 active:bg-green-500">
         Add to Basket
         </button> 

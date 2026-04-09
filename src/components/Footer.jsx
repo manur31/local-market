@@ -95,18 +95,10 @@ function Footer() {
 
         <section
           aria-label="Informacion legal y configuracion"
-          className="border-0 border-t border-[#BFC9C133]"
+          className="border-t border-[#BFC9C133]"
         >
-          <div className="mx-auto flex h-[53px] w-full max-w-[1280px] items-end justify-between px-[24px] text-sm">
+          <div className="mx-auto flex h-[53px] w-full max-w-[1280px] items-end justify-center px-[24px] text-sm">
             <p>© 2024 LocalMarket. All rights reserved.</p>
-            <div>
-              <button type="button" className="mr-8" aria-label="Seleccionar idioma">
-                <span className="mr-2"><i className="fas fa-globe-americas"></i></span>English
-              </button>
-              <button type="button" aria-label="Seleccionar moneda">
-                <span className="mr-2"><i className="far fa-money-bill-alt"></i></span>USD
-              </button>
-            </div>
           </div>
         </section>
       </section>

@@ -1,61 +1,45 @@
-function Header() {
-  return (
-    <header className="">
-      {/*  - - - - - - - - Mobile - - - - - - - -*/}
-      <section className="lg:hidden p-[20px_24px] bg-surface">
-        <div className="flex items-end justify-between mb-6 mx-2">
-          <h1 className="font-bold text-2xl text-primary">LocalMarket</h1>
-          <ul className="flex">
-            <li className="mr-10 text-[20px]">
-              <a href="#">
-                <i className="fas fa-shopping-cart"></i>
-              </a>
-            </li>
-            <li className="text-[20px]">
-              <a href="#">
-                <i className="far fa-user"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <ul className="flex justify-between mx-2 text-sm">
-          <li>
-            <a href="#">SHOP</a>
-          </li>
-          <li>
-            <a href="#">FARMERS</a>
-          </li>
-          <li>
-            <a href="#">DEALS</a>
-          </li>
-          <li>
-            <a href="#">SUBSCRIPTION</a>
-          </li>
-        </ul>
-      </section>
-      {/*  - - - - - - - - Desktop - - - - - - - -*/}
-      <section className="hidden  lg:block bg-surface " >
-        <div className="max-w-[1280px] mx-auto w-full flex justify-between p-[24px_24px] ">
+import { useState } from "react";
+import { Link } from 'react-router'
+import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
 
-        <h1 className="font-bold text-2xl text-primary">Local Market</h1>
-        <nav aria-label="Navegación principal">
-          <ul className="flex font-bold">
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li className="mx-8">
-              <a href="#">Shop</a>
-            </li>
-            <li>
-              <a href="#">Sell</a>
-            </li>
-          </ul>
+
+function Header() {
+
+  const [openMenu, setOpenMenu] = useState(false)
+
+  return (
+    <header className="sticky top-0 z-50">
+      <section className="bg-surface max-w-7xl mx-auto w-full flex justify-between items-center p-6" >
+        <Link to={'/'}>
+          <h1 onClick={() => setOpenMenu(false)} className="font-bold text-2xl text-primary">Local Market</h1>
+        </Link>
+        <nav aria-label="Navegación principal" className={`${openMenu ? 'flex' : 'hidden'} lg:flex max-sm:flex-col max-sm:w-full max-sm:h-dvh max-sm:absolute bg-surface max-sm:bg-surface/40 top-20 left-0`}>
+          <Link className="w-full flex items-center justify-center" to={'/'}>
+            <p onClick={() => setOpenMenu(!openMenu)} className="py-2 p-4 w-full text-center font-bold uppercase tracking-label lg:rounded-lg bg-surface hover:bg-primary hover:text-white">Home</p>
+          </Link>
+          <Link className="w-full flex items-center justify-center" to={'/products'}>
+            <p onClick={() => setOpenMenu(!openMenu)} className="py-2 p-4 w-full text-center font-bold uppercase tracking-label lg:rounded-lg bg-surface hover:bg-primary hover:text-white">Shop</p>
+          </Link>
+          <Link className="w-full flex items-center justify-center" to='/dashboard'>
+            <p onClick={() => setOpenMenu(!openMenu)} className="py-2 p-4 w-full text-center font-bold uppercase tracking-label lg:rounded-lg bg-surface hover:bg-primary hover:text-white">Sell</p>
+          </Link>
         </nav>
-          <ul className="flex">
-            <li className="mr-6 text-[20px]"><a href="#"><i className="fas fa-shopping-cart"></i></a></li>
-            <li className="text-[20px]"><a href="#"><i className="far fa-user"></i></a></li>
-          </ul>
-        </div>
+        <nav className="flex gap-6 text-2xl">
+          <Link className="relative" to={'/cart'}>
+            <FiShoppingCart onClick={() => setOpenMenu(false)}/>
+            <p className="absolute -top-3 -right-4 size-6 bg-primary flex items-center justify-center text-white text-sm rounded-full">2</p>
+          </Link>
+          <Link to={'/dashboard'}>
+            <FiUser onClick={() => setOpenMenu(false)}/>
+          </Link>
+          <div className="lg:hidden">
+            {openMenu ? (
+              <FiX onClick={() => setOpenMenu(!openMenu)}/>
+            ) : (
+              <FiMenu onClick={() => setOpenMenu(!openMenu)}/>
+            )}
+          </div>
+        </nav>
       </section>
     </header>
   );
