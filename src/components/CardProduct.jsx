@@ -5,7 +5,7 @@ function CardProduct({product}) {
 
   return (
     <article
-      className="w-85  bg-surface rounded-lg m-10 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 shadow-xl sh-"
+      className="w-85 bg-surface rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 shadow-xl sh-"
     >
       <div className="relative overflow-hidden">
         {/* TEXTO */}
@@ -29,7 +29,7 @@ function CardProduct({product}) {
         </button>
 
         {/* IMAGEN con zoom */}
-        {product.images[0] ? (
+        {product?.images[0] ? (
           <img
             className="w-full h-[256px] object-cover transition-transform duration-300 hover:scale-105"
             src={product?.images[0]}
@@ -50,7 +50,7 @@ function CardProduct({product}) {
         </div>
         <p className="py-2 text-sm text-[#999999] h-[60px] overflow-hidden">{product?.description}</p>
         <button className="bg-[#9CE39E] w-full h-13 rounded-lg transition-all duration-150 hover:bg-green-400 active:scale-95 active:bg-green-500">
-        Add to Basket
+        Agregar al Carrito
         </button> 
       </section>
     </article>
