@@ -5,7 +5,7 @@ function CardProduct({ title, price, image, businessId, description, lote }) {
 
   return (
     <article
-      className="w-85  bg-surface rounded-lg m-10 overflow-hidden 
+      className="lg:w-70 xl:w-80 bg-surface rounded-lg m-2 overflow-hidden 
                         transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
     >
       <div className="relative overflow-hidden">
