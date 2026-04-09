@@ -4,6 +4,7 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import HomePage from "./pages/HomePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
+import ProductListingPage from "./pages/ProductListingPage"
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path={'/'} element ={<HomePage/>} /> 
-          <Route path={'/products'} element/> {/* Aqui ve ProductListingPage */}
+          <Route path={'/products'} element={<ProductListingPage/>}/>
           <Route path={'/products/:id'}element={<ProductDetailPage
                   name="Raw Wildflower Honey"
                   price="18.00"
