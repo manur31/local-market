@@ -96,7 +96,7 @@ Estamos usando variables en `@theme`, y **Tailwind se encarga de convertirlas en
 
 👉 Aquí SÍ usamos `var()`:
 
-```jsx
+jsx
 <button className="bg-[var(--gradient-primary)] text-white px-6 py-3 rounded-full">
   Acción
 </button>

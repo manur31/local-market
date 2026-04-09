@@ -101,10 +101,10 @@ function Footer() {
             <p>© 2024 LocalMarket. All rights reserved.</p>
             <div>
               <button type="button" className="mr-8" aria-label="Seleccionar idioma">
-                <span className="mr-2"><i class="fas fa-globe-americas"></i></span>English
+                <span className="mr-2"><i className="fas fa-globe-americas"></i></span>English
               </button>
               <button type="button" aria-label="Seleccionar moneda">
-                <span className="mr-2"><i class="far fa-money-bill-alt"></i></span>USD
+                <span className="mr-2"><i className="far fa-money-bill-alt"></i></span>USD
               </button>
             </div>
           </div>

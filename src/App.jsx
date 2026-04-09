@@ -2,6 +2,7 @@ import { AuthProvider } from "./context/authContext"
 import {BrowserRouter, Routes, Route} from 'react-router'
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import Dashboard from "./pages/Dashboard"
 import HomePage from "./pages/HomePage"
 import ProductDetailPage from "./pages/ProductDetailPage"
 import ProductListingPage from "./pages/ProductListingPage"

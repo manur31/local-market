@@ -68,6 +68,7 @@
   ========================= */
   --shadow-ambient: 0px 8px 32px rgba(25, 28, 29, 0.04);
   --shadow-ambient-form: 0px 4px 10px rgba(25, 28, 29, 0.5);
+  --shadow-seller-cards: 0px 2px 2px rgba(42, 23, 0, 0.2);
 
   /* =========================
      GLASS EFFECT
@@ -92,6 +93,11 @@
 
 }
 
+* {
+   font-family: var(--font-display);
+}
+
 body {
   font-family: var(--font-body);
+  background-color: var(--color-surface);
 }

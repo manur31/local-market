@@ -8,12 +8,12 @@ function Header() {
           <ul className="flex">
             <li className="mr-10 text-[20px]">
               <a href="#">
-                <i class="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart"></i>
               </a>
             </li>
             <li className="text-[20px]">
               <a href="#">
-                <i class="far fa-user"></i>
+                <i className="far fa-user"></i>
               </a>
             </li>
           </ul>
@@ -52,8 +52,8 @@ function Header() {
           </ul>
         </nav>
           <ul className="flex">
-            <li className="mr-6 text-[20px]"><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-            <li className="text-[20px]"><a href="#"><i class="far fa-user"></i></a></li>
+            <li className="mr-6 text-[20px]"><a href="#"><i className="fas fa-shopping-cart"></i></a></li>
+            <li className="text-[20px]"><a href="#"><i className="far fa-user"></i></a></li>
           </ul>
         </div>
       </section>
