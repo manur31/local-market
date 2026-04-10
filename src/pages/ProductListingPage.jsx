@@ -4,35 +4,47 @@ import { useProduct } from "../context/productContext.jsx";
 import { useCategory } from "../context/categoryContext.jsx";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { useLocation } from "react-router";
+import { useCart } from "../context/cartContext.jsx";
 
 
 function ProductListingPage() {
   const { products, getProducts } = useProduct()
   const { categories, getCategories } = useCategory()
   const [active, setActive] = useState("All");
-  const [pagina, setPagina] = useState(0);
+  const [page, setPage] = useState(0);
   const [filteredProducts, setFilteredProducts] = useState(null)
   const location = useLocation();
   const [search, setSearch] = useState('')
+
+  const { cart, updateCart } = useCart()
 
   useEffect(() => {
     async function fetchData() {
       await getProducts()
       await getCategories()
-    }
+    } 
 
     fetchData()
-  }, [products])
+  }, [])
 
   useEffect(() => {
+    let result = [...products]
 
-    if (active === "All") {
-      setFilteredProducts(products)
-    } else {
-      setFilteredProducts(products.filter(product => product.category === active))
+    if (active !== "All") {
+      result = result.filter(p => p.category === active)
     }
 
-  }, [active])
+    if (search) {
+      result = result.filter(p =>
+        p.name.toLowerCase().includes(search.toLowerCase()) ||
+        p.description.toLowerCase().includes(search.toLowerCase()) ||
+        p.category.toLowerCase().includes(search.toLowerCase()) ||
+        p.price.toString().includes(search)
+      )
+    }
+
+    setFilteredProducts(result)
+  }, [products, active, search])
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -40,24 +52,12 @@ function ProductListingPage() {
     setSearch(q);
   }, [location.search]);
 
-  useEffect(() => {
-    setActive('All')
-    setFilteredProducts(products.filter(product => {
-      return (
-        product.name.toLowerCase().includes(search.toLowerCase()) ||
-        product.description.toLowerCase().includes(search.toLowerCase()) ||
-        product.category.toLowerCase().includes(search.toLowerCase()) ||
-        product.price.toString().toLowerCase().includes(search.toLowerCase())
-      )
-    }))
-  }, [search]);
+  const itemsForPage = 9; // 3 filas x 3 columnas (puedes ajustar)
 
-  const elementosPorPagina = 9; // 3 filas x 3 columnas (puedes ajustar)
+  const totalPage = Math.ceil(filteredProducts?.length / itemsForPage);
 
-  const totalPaginas = Math.ceil(filteredProducts?.length / elementosPorPagina);
-
-  const inicio = pagina * elementosPorPagina;
-  const productosVisibles = filteredProducts?.slice(inicio, inicio + elementosPorPagina);
+  const start = page * itemsForPage;
+  const visibleProducts = filteredProducts?.slice(start, start + itemsForPage);
 
 
 
@@ -85,7 +85,7 @@ function ProductListingPage() {
 
         {/* - - - - - - - - - - - - - - - - - - -CATEGORIES- - - - - - - - - - - - - - - - - - - */}
         <div className="flex justify-center mt-6 mb-6">
-          <ul className="flex gap-3">
+          <ul className="flex flex-wrap gap-3">
             <button onClick={() => setActive('All')} className={`px-4 py-2 rounded-full transition ${active === 'All' ? "bg-primary text-white" : "bg-gray-200 text-black"}`}
                 >
                   Todos
@@ -101,27 +101,29 @@ function ProductListingPage() {
         </div>
 
         {/* - - - - - - - - - - - - - - - - - - -CARRUSEL- - - - - - - - - - - - - - - - - - - */}
-        <div className="w-full flex justify-center items-center max-w-7xl mx-auto my-10 h-fit gap-2">
+        <div className="w-full flex justify-center items-end max-w-7xl mx-auto my-10 h-fit gap-2">
           {/* - - - - - - - - - - - - - - - - - - -Botones izquierda- - - - - - - - - - - - - - - - - - - */}
 
-          <button onClick={() => setPagina((p) => Math.max(p - 1, 0))} className="px-5 py-4 rounded-full border border-gray-400 bg-surface transition-all duration-200 ease-in-out hover:bg-gray-200 hover:scale-105 active:scale-95 active:bg-gray-300 active:shadow-inner">
+          <button onClick={() => setPage((p) => Math.max(p - 1, 0))} className={`${itemsForPage >= products?.length && 'hidden'} px-5 py-4 rounded-full border border-gray-400 bg-surface transition-all duration-200 ease-in-out hover:bg-gray-200 hover:scale-105 active:scale-95 active:bg-gray-300 active:shadow-inner`}>
             <FiArrowLeft/>
           </button>
 
           {/* - - - - - - - - - - - - - - - - - - -Grid- - - - - - - - - - - - - - - - - - - */}
           <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] justify-items-center gap-y-10 w-full ">
-            {productosVisibles?.map((product) => (
+            {visibleProducts?.map((product) => (
               <CardProduct
               key={product.id}
               product={product}
+              updateCart={updateCart}
+              cart={cart}
               />
             ))}
           </div>
           {/* - - - - - - - - - - - - - - - - - - -Botones derechaza - - - - - - - - - - - - - - - - - - - */}
 
           <button
-            onClick={() => setPagina((p) => Math.min(p + 1, totalPaginas - 1))}
-            className="px-5 py-4 rounded-full border border-gray-400 bg-surface transition-all duration-200 ease-in-out hover:bg-gray-200 hover:scale-105 active:scale-95 active:bg-gray-300 active:shadow-inner">
+            onClick={() => setPage((p) => Math.min(p + 1, totalPage - 1))}
+            className={`${itemsForPage >= products?.length && 'hidden'} px-5 py-4 rounded-full border border-gray-400 bg-surface transition-all duration-200 ease-in-out hover:bg-gray-200 hover:scale-105 active:scale-95 active:bg-gray-300 active:shadow-inner`}>
               <FiArrowRight/>
             </button>
         </div>
