@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from 'react-router'
 import { FiMenu, FiShoppingCart, FiUser, FiX } from "react-icons/fi";
+import { useCart } from "../context/cartContext";
 
 
 function Header() {
-
   const [openMenu, setOpenMenu] = useState(false)
+  const { cart } = useCart()
 
   return (
     <header className="sticky top-0 z-50">
-      <section className="bg-surface mx-auto w-full flex justify-between items-center p-6 lg:px-100" >
+      <section className="bg-surface mx-auto w-full max-w-[1440px] flex justify-between items-center p-6 lg:px-30" >
         <Link to={'/'}>
           <h1 onClick={() => setOpenMenu(false)} className="font-bold text-2xl text-primary">Local Market</h1>
         </Link>
@@ -27,7 +28,9 @@ function Header() {
         <nav className="flex gap-6 text-2xl">
           <Link className="relative" to={'/cart'}>
             <FiShoppingCart onClick={() => setOpenMenu(false)}/>
-            <p className="absolute -top-3 -right-4 size-6 bg-primary flex items-center justify-center text-white text-sm rounded-full">2</p>
+            <p className={`${cart?.length === 0 || cart === null && 'hidden'} absolute -top-3 -right-4 size-6 bg-primary flex items-center justify-center text-white text-sm rounded-full`}>
+              {cart?.length}
+            </p>
           </Link>
           <Link to={'/dashboard'}>
             <FiUser onClick={() => setOpenMenu(false)}/>

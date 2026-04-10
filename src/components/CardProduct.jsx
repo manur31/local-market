@@ -1,7 +1,20 @@
 import { useState } from "react";
+import { toast } from 'sonner'
 
-function CardProduct({product}) {
+function CardProduct({product, updateCart, cart}) {
   const [liked, setLiked] = useState(false);
+
+  const handleAddToCart = () => {
+    // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const existing = Array.isArray(cart) && cart?.find((item) => item.id === product.id);
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      const newCart = [...cart, { ...product, quantity: 1 }]
+      updateCart(newCart);
+    }
+    toast.success(`${product?.name} fue agregado a tu carrito`);
+  };
 
   return (
     <article
@@ -49,7 +62,7 @@ function CardProduct({product}) {
           <p className="text-primary text-[20px] font-bold">${product?.price}</p>
         </div>
         <p className="py-2 text-sm text-[#999999] h-[60px] overflow-hidden">{product?.description}</p>
-        <button className="bg-[#9CE39E] w-full h-13 rounded-lg transition-all duration-150 hover:bg-green-400 active:scale-95 active:bg-green-500">
+        <button onClick={handleAddToCart} className="bg-primary-container text-white w-full h-13 rounded-lg transition-all duration-150 hover:bg-primary active:scale-95 active:bg-green-500">
         Agregar al Carrito
         </button> 
       </section>

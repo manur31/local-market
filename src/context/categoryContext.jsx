@@ -8,7 +8,7 @@ export const useCategory = () => {
     const context = useContext(CategoryContext)
 
     if (!context) {
-        throw new Error("useCategory most be used within an CategoryProvider")
+        throw new Error("useCategory most be used within a CategoryProvider")
     }
 
     return context
