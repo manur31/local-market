@@ -5,16 +5,18 @@ function CardProduct({product, updateCart, cart}) {
   const [liked, setLiked] = useState(false);
 
   const handleAddToCart = () => {
-    // const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const existing = Array.isArray(cart) && cart?.find((item) => item.id === product.id);
+
     if (existing) {
       existing.quantity += 1;
+      localStorage.setItem("cart", JSON.stringify(cart));
     } else {
       const newCart = [...cart, { ...product, quantity: 1 }]
-      updateCart(newCart);
+      updateCart(newCart); 
     }
     toast.success(`${product?.name} fue agregado a tu carrito`);
   };
+
 
   return (
     <article

@@ -20,6 +20,7 @@ function Dashboard() {
     const [image, setImage] = useState(null)
     const [seletedProduct, setSeletedProduct] = useState(null)
     const [business, setBusiness] = useState(user?.business)
+    const [orders, setOrders] = useState(undefined)
 
     const handleEdit = (product) => {
         setSeletedProduct(product)
@@ -52,98 +53,6 @@ function Dashboard() {
         setOpen(!open)
     }
 
-const orders = [
-  {
-    id: "order-1",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-  {
-    id: "order-2",
-    order_code: "ORD-002",
-    customer_name: "Ana Gómez",
-    items: 2,
-    delivery_address: "Santo Domingo Este",
-    total: 90,
-    status: "processing",
-    created_at: "2026-03-26T10:00:00Z",
-  },
-  {
-    id: "order-3",
-    order_code: "ORD-003",
-    customer_name: "Luis Martínez",
-    items: 5,
-    delivery_address: "Gazcue",
-    total: 250,
-    status: "completed",
-    created_at: "2026-03-25T09:00:00Z",
-  },
-  {
-    id: "order-4",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-  {
-    id: "order-5",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-  {
-    id: "order-6",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-  {
-    id: "order-7",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-  {
-    id: "order-8",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-  {
-    id: "order-9",
-    order_code: "ORD-001",
-    customer_name: "Carlos Pérez",
-    items: 3,
-    delivery_address: "Villa Mella",
-    total: 175,
-    status: "pending",
-    created_at: "2026-03-27T11:00:00Z",
-  },
-];
 
   return (
     <main className=' max-w-[1240px] mx-auto mb-4 sm:mb-10 lg:mb-26'>
@@ -198,7 +107,7 @@ const orders = [
                 </div>
                 <section>
                     <h3 className='text-sm text-neutral-500'>Ordenes</h3>
-                    <p className='text-2xl'>{orders.length}</p>
+                    <p className='text-2xl'>{orders?.length}</p>
                 </section>
             </article>
 
@@ -238,7 +147,11 @@ const orders = [
                             </section>
                         ) : (
                             <section>
-                                <OrdersTable orders={orders}/>
+                                {orders ? (
+                                    <OrdersTable orders={orders}/>
+                                    ) : (
+                                    <h3 className='text-on-surface text-sm'>Aun no tienes ninguna orden</h3>
+                                )}
                             </section>
                         )}
                 </article>

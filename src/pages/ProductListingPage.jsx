@@ -52,7 +52,7 @@ function ProductListingPage() {
     setSearch(q);
   }, [location.search]);
 
-  const itemsForPage = 9; // 3 filas x 3 columnas (puedes ajustar)
+  const itemsForPage = 6; // 3 filas x 3 columnas (puedes ajustar)
 
   const totalPage = Math.ceil(filteredProducts?.length / itemsForPage);
 

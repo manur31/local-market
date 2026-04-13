@@ -75,7 +75,7 @@ const CartPage = () => {
                 </div>
 
                 <Link to="/checkout">
-                <button className="bg-primary text-white w-full py-3 mt-4 rounded-full transition-all duration-150 hover:bg-green-400 active:scale-95 active:bg-green-500">
+                <button className="bg-primary-container text-white w-full py-3 mt-4 rounded-full transition-all duration-150 hover:bg-primary active:scale-95 active:bg-primary">
                     Proceder a pagar
                 </button> 
                 </Link>

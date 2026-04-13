@@ -21,13 +21,13 @@ function Footer() {
         </ul>
       {/*  - - - - - - Version Desktop - - - - - - */}
       </section>
-      <section className="hidden lg:block border-0 border-t border-[#BFC9C133] pt-[80px] pb-[80px]">
-        <div className="mx-auto w-full max-w-[1280px] px-[24px]">
+      <section className="hidden lg:block border-0 border-t border-[#BFC9C133] py-10">
+        <div className="mx-auto w-full max-w-7xl px-6">
         <section
           aria-label="Informacion principal del footer"
-          className="mb-[80px] flex gap-12"
+          className="mb-8 flex gap-12"
         >
-          <div className="flex-1 max-w-[272px] aspect-video">
+          <div className="flex-1 max-w-2xs aspect-video">
             <h2 className="text-primary font-bold text-lg mb-6 shrink-0">LocalMarket</h2>
             <p>
               Empowering independent creators and local communities since 2024.
@@ -37,7 +37,7 @@ function Footer() {
 
           <nav
             aria-label="Enlaces de empresa"
-            className="flex flex-col flex-1 max-w-[272px] aspect-video min-h-0 text-base"
+            className="flex flex-col flex-1 max-w-2xs aspect-video min-h-0 text-base"
           >
             <h3 className="mb-6 shrink-0 font-bold">Company</h3>
             <ul className="flex min-h-0 flex-1 flex-col justify-evenly">
@@ -71,19 +71,19 @@ function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Redes sociales" className="flex-1 max-w-[272px] aspect-video text-base">
+          <nav aria-label="Redes sociales" className="flex-1 max-w-64 aspect-video text-base">
             <h3 className="mb-6 shrink-0 font-bold">Connect</h3>
             <div className="flex items-center gap-4">
               <a
                 href="#"
-                className="inline-flex size-[40px] items-center justify-center bg-gray-100 rounded-full "
+                className="inline-flex size-10 items-center justify-center bg-gray-100 rounded-full "
                 aria-label="Ir a red social 1"
               >
                 <i className="fas fa-share-alt" />
               </a>
               <a
                 href="#"
-                className="inline-flex size-[40px] items-center justify-center bg-gray-100 rounded-full"
+                className="inline-flex size-10 items-center justify-center bg-gray-100 rounded-full"
                 aria-label="Ir a red social 2"
               >
                 <i className="fas fa-at" />
@@ -97,7 +97,7 @@ function Footer() {
           aria-label="Informacion legal y configuracion"
           className="border-t border-[#BFC9C133]"
         >
-          <div className="mx-auto flex h-[53px] w-full max-w-[1280px] items-end justify-center px-[24px] text-sm">
+          <div className="mx-auto flex h-14 w-full max-w-7xl items-end justify-center px-6 text-sm">
             <p>© 2024 LocalMarket. All rights reserved.</p>
           </div>
         </section>

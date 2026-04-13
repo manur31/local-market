@@ -4,7 +4,7 @@ function SelectCategory({ register, errors, setValue, initialCategory, newCatego
   const [mostrarInput, setMostrarInput] = useState(false);
 
   useEffect(() => {
-    if (initialCategory && categories.length > 0) {
+    if (initialCategory && categories?.length > 0) {
       const catFound = categories.find((cat) => cat.name === initialCategory);
       if (catFound) {
         setValue("category", initialCategory);
